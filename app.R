@@ -60,6 +60,11 @@ server <- function(input, output, session) {
         # value
         updateSliderInput(session, "day", max = max_days())
     })
+    observeEvent(input$year, {
+        # observe year input and update day slider max
+        # value
+        updateSliderInput(session, "day", max = max_days())
+    })
     date_time <- reactive({
         # create date and time object from full date and
         # time string
