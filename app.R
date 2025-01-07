@@ -36,19 +36,18 @@ ui <- fluidPage(titlePanel("Date and Time in R Shiny"), sidebarLayout(sidebarPan
 ,
     textOutput("hour")  #hour output
 , textOutput("day_of_year")  #day of year output
-, textOutput("month")  #month output
+, textOutput("month_number")  #month output
+, textOutput("minute")  #minute output
 ,
-    textOutput("minute")  #minute output
-, textOutput("hour_12_clock")  #12-hour clock output
-, textOutput("second")  #second output
+    textOutput("hour_12_clock")  #12-hour clock output
 ,
-    textOutput("weekday_format")  #weekday format output
-,
-    textOutput("week_of_year")  #week of year output
+    textOutput("second")  #second output
+, textOutput("weekday_format")  #weekday format output
+, textOutput("week_of_year")  #week of year output
 , textOutput("year")  #year output
-, textOutput("timezone")  #timezone output
 ,
-    textOutput("millisecond")  #millisecond output
+    textOutput("timezone")  #timezone output
+, textOutput("millisecond")  #millisecond output
 )))
 # define server component
 server <- function(input, output, session) {
@@ -124,7 +123,7 @@ server <- function(input, output, session) {
             "%A"), ")", " (", format(date_time(), "%a"), ")",
             sep = "")
     })
-    output$month <- renderText({
+    output$month_number <- renderText({
         # month output
         paste("Month: ", format(date_time(), "%B"), " (", format(date_time(),
             "%b"), ")", sep = "")
