@@ -18,6 +18,11 @@ ui <- fluidPage(titlePanel("Date and Time in R Shiny"), sidebarLayout(sidebarPan
         step = 1)  #second input
 , sliderInput("millisecond",
         "Millisecond", min = 0, max = 999, value = 0, step = 1)  #millisecond input
+, sliderInput("microsecond", "Microsecond",
+        min = 0, max = 999, value = 0, step = 1)  #microsecond input
+,
+    sliderInput("nanosecond", "Nanosecond", min = 0, max = 999,
+        value = 0, step = 1)  #nanosecond input
 ), mainPanel(textOutput("iso_format")  #ISO format output
 , textOutput("us_format")  #US format output
 ,
@@ -68,10 +73,11 @@ server <- function(input, output, session) {
     date_time <- reactive({
         # create date and time object from full date and
         # time string
-        as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d.%03d",
+        as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d.%03d%03d%03d",
             as.integer(input$year), as.integer(input$month),
             as.integer(input$day), as.integer(input$hour), as.integer(input$minute),
-            as.integer(input$second), as.integer(input$millisecond)),
+            as.integer(input$second), as.integer(input$millisecond),
+            as.integer(input$microsecond), as.integer(input$nanosecond)),
             tz = "UTC")
     })
     output$date_time <- renderText({
