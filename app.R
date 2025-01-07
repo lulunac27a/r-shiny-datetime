@@ -25,6 +25,30 @@ ui <- fluidPage(titlePanel("Date and Time in R Shiny"), sidebarLayout(sidebarPan
 ,
     textOutput("eu_format")  #EU format output
 , textOutput("date_time")  #date and time output
+, textOutput("weekday")  #weekday output
+,
+    textOutput("month")  #month output
+, textOutput("locale_date_time")  #locale date and time output
+, textOutput("day_of_month")  #day of month output
+, textOutput("date")  #date output
+,
+    textOutput("week_based_year")  #week based year output
+,
+    textOutput("hour")  #hour output
+, textOutput("day_of_year")  #day of year output
+, textOutput("month")  #month output
+,
+    textOutput("minute")  #minute output
+, textOutput("hour_12_clock")  #12-hour clock output
+, textOutput("second")  #second output
+,
+    textOutput("weekday_format")  #weekday format output
+,
+    textOutput("week_of_year")  #week of year output
+, textOutput("year")  #year output
+, textOutput("timezone")  #timezone output
+,
+    textOutput("millisecond")  #millisecond output
 )))
 # define server component
 server <- function(input, output, session) {
@@ -82,18 +106,94 @@ server <- function(input, output, session) {
     })
     output$iso_format <- renderText({
         # ISO format output
-        paste("ISO Format:", format(date_time(), "%Y-%m-%dT%H:%M:%OS3Z"))
+        paste("ISO Format: ", format(date_time(), "%Y-%m-%dT%H:%M:%OS3Z"))
     })
 
     output$us_format <- renderText({
         # US format output
-        paste("US Format:", format(date_time(), "%m/%d/%Y %I:%M:%S %p"))
+        paste("US Format: ", format(date_time(), "%m/%d/%Y %I:%M:%S %p"))
     })
 
     output$eu_format <- renderText({
         # EU format output
-        paste("EU Format:", format(date_time(), "%d/%m/%Y %H:%M:%S"))
+        paste("EU Format: ", format(date_time(), "%d/%m/%Y %H:%M:%S"))
     })
+    output$weekday <- renderText({
+        # weekday function output
+        paste("Weekday: ", weekdays(date_time()), " (", format(date_time(),
+            "%A"), ")", " (", format(date_time(), "%a"), ")",
+            sep = "")
+    })
+    output$month <- renderText({
+        # month output
+        paste("Month: ", format(date_time(), "%B"), " (", format(date_time(),
+            "%b"), ")", sep = "")
+    })
+    output$locale_date_time <- renderText({
+        # locale date and time output
+        paste("Locale Date and Time: ", format(date_time(), "%c"))
+    })
+    output$day_of_month <- renderText({
+        # day of month output
+        paste("Day of Month: ", format(date_time(), "%d"))
+    })
+    output$date <- renderText({
+        # date output
+        paste("Date: ", format(date_time(), "%D"))
+    })
+    output$week_based_year <- renderText({
+        # week based year output
+        paste("Week Based Year: ", format(date_time(), "%G"))
+    })
+    output$hour <- renderText({
+        # hour output
+        paste("Hour: ", format(date_time(), "%H"), " (", format(date_time(),
+            "%I"), " ", format(date_time(), "%p"), ")", sep = "")
+    })
+    output$day_of_year <- renderText({
+        # day of year output
+        paste("Day of Year: ", format(date_time(), "%j"))
+    })
+    output$month <- renderText({
+        # month output
+        paste("Month: ", format(date_time(), "%m"))
+    })
+    output$minute <- renderText({
+        # minute output
+        paste("Minute: ", format(date_time(), "%M"))
+    })
+    output$hour_12_clock <- renderText({
+        # 12-hour clock output
+        paste("12-Hour Clock: ", format(date_time(), "%r"))
+    })
+    output$second <- renderText({
+        # second output
+        paste("Second: ", format(date_time(), "%S"))
+    })
+    output$weekday_format <- renderText({
+        # weekday format output
+        paste("Weekday Format: ", format(date_time(), "%u"))
+    })
+    output$week_of_year <- renderText({
+        # week of year output
+        paste("Week of Year: ", format(date_time(), "%V", " (Week of Year for Sunday as first day of week): ",
+            format(date_time(), "%U"), " (Week of Year for Monday as first day of week): ",
+            format(date_time(), "%W"), sep = ""))
+    })
+    output$year <- renderText({
+        # year output
+        paste("Year: ", format(date_time(), "%Y"))
+    })
+    output$timezone <- renderText({
+        # timezone output
+        paste("Timezone: ", format(date_time(), "%Z"), " (",
+            format(date_time(), "%z"), ")", sep = "")
+    })
+    output$millisecond <- renderText({
+        # millisecond output
+        paste("Millisecond: ", format(date_time(), "%L"))
+    })
+
 
 }
 # run the Shiny web app server
