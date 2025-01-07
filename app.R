@@ -51,9 +51,13 @@ server <- function(input, output, session) {
         }
     }
     max_days <- reactive({
+        # set max value of day slider to the number of days
+        # in the month
         days_in_month(as.integer(input$month), as.integer(input$year))
     })
     observeEvent(input$month, {
+        # observe month input and update day slider max
+        # value
         updateSliderInput(session, "day", max = max_days())
     })
     date_time <- reactive({
