@@ -25,7 +25,37 @@ ui <- fluidPage(titlePanel("Date and Time in R Shiny"), sidebarLayout(sidebarPan
 , textOutput("date_time")  #date and time output
 )))
 # define server component
-server <- function(input, output) {
+server <- function(input, output, session) {
+    # check if a year is a leap year
+    is_leap_year <- function(year) {
+        (year%%4 == 0 & year%%100 != 0) | (year%%400 == 0)
+    }
+    # calculate the number of days in a month
+    days_in_month <- function(month, year) {
+        # if month is February, check if it's a leap year
+        if (month == 2) {
+            # if it's a leap year, return 29 days,
+            # otherwise return 28 days
+            if (is_leap_year(year)) {
+                return(29)
+            } else {
+                return(28)
+            }
+            # if month is April, June, September, or
+            # November, return 30 days
+        } else if (month %in% c(4, 6, 9, 11)) {
+            return(30)
+            # otherwise, return 31 days
+        } else {
+            return(31)
+        }
+    }
+    max_days <- reactive({
+        days_in_month(as.integer(input$month), as.integer(input$year))
+    })
+    observeEvent(input$month, {
+        updateSliderInput(session, "day", max = max_days())
+    })
     date_time <- reactive({
         # create date and time object from full date and
         # time string
@@ -53,6 +83,8 @@ server <- function(input, output) {
         # EU format output
         paste("EU Format:", format(date_time(), "%d/%m/%Y %H:%M:%S"))
     })
+
 }
 # run the Shiny web app server
 shinyApp(ui = ui, server = server)
+
