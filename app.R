@@ -2,17 +2,20 @@
 library(shiny)
 # define UI component
 ui <- fluidPage(titlePanel("Date and Time in R Shiny"), sidebarLayout(sidebarPanel(textInput("year",
-    "Year", value = "2022")  #year input
-, sliderInput("month",
-    "Month", min = 1, max = 12, value = 1, step = 1)  #month input
+    "Year", value = format(Sys.Date(), "%Y"))  #year input
 ,
-    sliderInput("day", "Day", min = 1, max = 31, value = 1, step = 1)  #day of month input
-, sliderInput("hour", "Hour", min = 0,
-        max = 23, value = 0, step = 1)  #hour input
-, sliderInput("minute",
-        "Minute", min = 0, max = 59, value = 0, step = 1)  #minute input
-, sliderInput("second", "Second", min = 0,
-        max = 59, value = 0, step = 1)  #second input
+    sliderInput("month", "Month", min = 1, max = 12, value = 1,
+        step = 1)  #month input
+, sliderInput("day", "Day",
+        min = 1, max = 31, value = 1, step = 1)  #day of month input
+,
+    sliderInput("hour", "Hour", min = 0, max = 23, value = 0,
+        step = 1)  #hour input
+, sliderInput("minute", "Minute",
+        min = 0, max = 59, value = 0, step = 1)  #minute input
+,
+    sliderInput("second", "Second", min = 0, max = 59, value = 0,
+        step = 1)  #second input
 , sliderInput("millisecond",
         "Millisecond", min = 0, max = 999, value = 0, step = 1)  #millisecond input
 ), mainPanel(textOutput("iso_format")  #ISO format output
