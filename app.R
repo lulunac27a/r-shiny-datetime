@@ -101,21 +101,24 @@ server <- function(input, output, session) {
     })
     output$date_time <- renderText({
         # date and time output
-        paste("Date and Time:", date_time())
+        paste("Date and Time:", date_time(), sep = "")
     })
     output$iso_format <- renderText({
         # ISO format output
-        paste("ISO Format: ", format(date_time(), "%Y-%m-%dT%H:%M:%OS3Z"))
+        paste("ISO Format: ", format(date_time(), "%Y-%m-%dT%H:%M:%OS3Z"),
+            sep = "")
     })
 
     output$us_format <- renderText({
         # US format output
-        paste("US Format: ", format(date_time(), "%m/%d/%Y %I:%M:%S %p"))
+        paste("US Format: ", format(date_time(), "%m/%d/%Y %I:%M:%S %p"),
+            sep = "")
     })
 
     output$eu_format <- renderText({
         # EU format output
-        paste("EU Format: ", format(date_time(), "%d/%m/%Y %H:%M:%S"))
+        paste("EU Format: ", format(date_time(), "%d/%m/%Y %H:%M:%S"),
+            sep = "")
     })
     output$weekday <- renderText({
         # weekday function output
@@ -130,19 +133,21 @@ server <- function(input, output, session) {
     })
     output$locale_date_time <- renderText({
         # locale date and time output
-        paste("Locale Date and Time: ", format(date_time(), "%c"))
+        paste("Locale Date and Time: ", format(date_time(), "%c"),
+            sep = "")
     })
     output$day_of_month <- renderText({
         # day of month output
-        paste("Day of Month: ", format(date_time(), "%d"))
+        paste("Day of Month: ", format(date_time(), "%d"), sep = "")
     })
     output$date <- renderText({
         # date output
-        paste("Date: ", format(date_time(), "%D"))
+        paste("Date: ", format(date_time(), "%D"), sep = "")
     })
     output$week_based_year <- renderText({
         # week based year output
-        paste("Week Based Year: ", format(date_time(), "%G"))
+        paste("Week Based Year: ", format(date_time(), "%G"),
+            sep = "")
     })
     output$hour <- renderText({
         # hour output
@@ -151,27 +156,28 @@ server <- function(input, output, session) {
     })
     output$day_of_year <- renderText({
         # day of year output
-        paste("Day of Year: ", format(date_time(), "%j"))
+        paste("Day of Year: ", format(date_time(), "%j"), sep = "")
     })
     output$month <- renderText({
         # month output
-        paste("Month: ", format(date_time(), "%m"))
+        paste("Month: ", format(date_time(), "%m"), sep = "")
     })
     output$minute <- renderText({
         # minute output
-        paste("Minute: ", format(date_time(), "%M"))
+        paste("Minute: ", format(date_time(), "%M"), sep = "")
     })
     output$hour_12_clock <- renderText({
         # 12-hour clock output
-        paste("12-Hour Clock: ", format(date_time(), "%r"))
+        paste("12-Hour Clock: ", format(date_time(), "%r"), sep = "")
     })
     output$second <- renderText({
         # second output
-        paste("Second: ", format(date_time(), "%S"))
+        paste("Second: ", format(date_time(), "%S"), sep = "")
     })
     output$weekday_format <- renderText({
         # weekday format output
-        paste("Weekday Format: ", format(date_time(), "%u"))
+        paste("Weekday Format: ", format(date_time(), "%u"),
+            sep = "")
     })
     output$week_of_year <- renderText({
         # week of year output
@@ -181,7 +187,7 @@ server <- function(input, output, session) {
     })
     output$year <- renderText({
         # year output
-        paste("Year: ", format(date_time(), "%Y"))
+        paste("Year: ", format(date_time(), "%Y"), sep = "")
     })
     output$timezone <- renderText({
         # timezone output
@@ -190,7 +196,7 @@ server <- function(input, output, session) {
     })
     output$millisecond <- renderText({
         # millisecond output
-        paste("Millisecond: ", format(date_time(), "%L"))
+        paste("Millisecond: ", format(date_time(), "%L"), sep = "")
     })
 
 
