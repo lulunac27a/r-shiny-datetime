@@ -181,9 +181,9 @@ server <- function(input, output, session) {
     })
     output$week_of_year <- renderText({
         # week of year output
-        paste("Week of Year: ", format(date_time(), "%V", " (Week of Year for Sunday as first day of week): ",
+        paste("Week of Year: ", format(date_time(), "%V"), " (Week of Year for Sunday as first day of week): ",
             format(date_time(), "%U"), " (Week of Year for Monday as first day of week): ",
-            format(date_time(), "%W"), sep = ""))
+            format(date_time(), "%W"), sep = "")
     })
     output$year <- renderText({
         # year output
