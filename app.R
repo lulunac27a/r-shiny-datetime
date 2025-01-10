@@ -48,6 +48,9 @@ ui <- fluidPage(titlePanel("Date and Time in R Shiny"), sidebarLayout(sidebarPan
 ,
     textOutput("timezone")  #timezone output
 , textOutput("millisecond")  #millisecond output
+, textOutput("quarter")  #quarter output
+,
+    textOutput("semester")  #semester output
 )))
 # define server component
 server <- function(input, output, session) {
@@ -198,7 +201,14 @@ server <- function(input, output, session) {
         # millisecond output
         paste("Millisecond: ", format(date_time(), "%L"), sep = "")
     })
-
+    output$quarter <- renderText({
+        # quarter output
+        paste("Quarter: ", quarter(date_time()), sep = "")
+    })
+    output$semester <- renderText({
+        # semester output
+        paste("Semester: ", semester(date_time()), sep = "")
+    })
 
 }
 # run the Shiny web app server
