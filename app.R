@@ -51,6 +51,15 @@ ui <- fluidPage(titlePanel("Date and Time in R Shiny"), sidebarLayout(sidebarPan
 , textOutput("quarter")  #quarter output
 ,
     textOutput("semester")  #semester output
+, textOutput("week_jan_1")  #weeks since January 1 output
+, textOutput("week_iso_8601")  #ISO 8601 week output
+, textOutput("epidemiological_week")  #epidemiological week output
+, textOutput("weekday_lubridate")  #weekday lubridate output
+, textOutput("day_of_month_lubridate")  #day of month lubridate output
+, textOutput("day_of_year_lubridate")  #day of year lubridate output
+, textOutput("timezone_lubridate")  #timezone lubridate output
+, textOutput("local_timezone")  #local timezone output
+, textOutput("decimal_date")  #decimal date output (fraction of year)
 )))
 # define server component
 server <- function(input, output, session) {
@@ -101,6 +110,15 @@ server <- function(input, output, session) {
             as.integer(input$day), as.integer(input$hour), as.integer(input$minute),
             as.integer(input$second), as.integer(input$millisecond)),
             tz = "UTC")
+    })
+    local_date_time <- reactive({
+        # create local date and time object from full date
+        # and time string
+        as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d.%03d",
+            as.integer(input$year), as.integer(input$month),
+            as.integer(input$day), as.integer(input$hour), as.integer(input$minute),
+            as.integer(input$second), as.integer(input$millisecond)),
+            tz = Sys.timezone())
     })
     output$date_time <- renderText({
         # date and time output
@@ -208,6 +226,47 @@ server <- function(input, output, session) {
     output$semester <- renderText({
         # semester output
         paste("Semester: ", semester(date_time()), sep = "")
+    })
+    output$week_jan_1 <- renderText({
+        # weeks since January 1 output
+        paste("Weeks Since January 1: ", week(date_time()), sep = "")
+    })
+    output$week_iso_8601 <- renderText({
+        # ISO 8601 week output
+        paste("ISO 8601 Week: ", isoweek(date_time()), sep = "")
+    })
+    output$epidemiological_week <- renderText({
+        # epidemiological week output
+        paste("Epidemiological Week: ", epiweek(date_time()),
+            sep = "")
+    })
+    output$weekday_lubridate <- renderText({
+        # weekday lubridate output
+        paste("Weekday (lubridate): ", wday(date_time(), label = TRUE),
+            " (", wday(date_time(), label = FALSE), ")", sep = "")
+    })
+    output$day_of_month_lubridate <- renderText({
+        # day of month lubridate output
+        paste("Day of Month (lubridate): ", mday(date_time()),
+            sep = "")
+    })
+    output$day_of_year_lubridate <- renderText({
+        # day of year lubridate output
+        paste("Day of Year (lubridate): ", yday(date_time()),
+            sep = "")
+    })
+    output$timezone_lubridate <- renderText({
+        # timezone lubridate output
+        paste("Timezone: ", tz(date_time()), sep = "")
+    })
+    output$local_timezone <- renderText({
+        # local timezone output
+        paste("Local Timezone: ", Sys.timezone(), " (", tz(local_date_time()),
+            ")", sep = "")
+    })
+    output$decimal_date <- renderText({
+        # decimal date output (fraction of year)
+        paste("Decimal Date: ", decimal_date(date_time()), sep = "")
     })
 
 }
