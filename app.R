@@ -88,9 +88,6 @@ server <- function(input, output, session) {
             return(31)
         }
     }
-    num <- function(number) {
-        return(number)
-    }
     max_days <- reactive({
         # set max value of day slider to the number of days
         # in the month
