@@ -60,6 +60,7 @@ ui <- fluidPage(titlePanel("Date and Time in R Shiny"), sidebarLayout(sidebarPan
 , textOutput("timezone_lubridate")  #timezone lubridate output
 , textOutput("local_timezone")  #local timezone output
 , textOutput("decimal_date")  #decimal date output (fraction of year)
+, textOutput("progress")  #progress date output)
 )))
 # define server component
 server <- function(input, output, session) {
@@ -86,6 +87,9 @@ server <- function(input, output, session) {
         } else {
             return(31)
         }
+    }
+    num <- function(number) {
+        return(number)
     }
     max_days <- reactive({
         # set max value of day slider to the number of days
@@ -267,6 +271,14 @@ server <- function(input, output, session) {
     output$decimal_date <- renderText({
         # decimal date output (fraction of year)
         paste("Decimal Date: ", decimal_date(date_time()), sep = "")
+    })
+    output$progress <- renderText({
+        # progress date output
+        paste(c("Year Progress: ", "Month Progress: ", "Week Progress: ",
+            "Day Progress: ", "Hour Progress: ", "Minute Progress: ",
+            "Second Progress: "), cyclic_encoding(date_time(),
+            c("year", "month", "week", "day", "hour", "minute",
+                "second"), c("abs"))/(2 * pi), sep = "")
     })
 
 }
