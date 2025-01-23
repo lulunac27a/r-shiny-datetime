@@ -1,6 +1,6 @@
 # Print Date and Time in All Supported Formats using R Shiny
 
-This app is a date and time that prints in all supported formats. It is written in R Shiny.
+This app is a date and time that prints in all supported formats. It uses the `lubridate` package for date and time library and `shiny` package for R Shiny.
 
 ## Getting Started
 
