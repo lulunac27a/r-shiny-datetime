@@ -365,7 +365,7 @@ server <- function(input, output, session) {
             ) /
                 (2 * pi),
             sep = ""
-        )
+        ) # progress of date unit of year/month/week/day/hour/minute/second
     })
 }
 # run the Shiny web app server
